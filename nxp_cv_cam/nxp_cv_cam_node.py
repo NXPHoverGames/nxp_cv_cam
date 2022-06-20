@@ -87,7 +87,7 @@ class NXPCVCamNode(Node):
             if ret == True:
                 msg = self.bridge.cv2_to_imgmsg(frame, "bgr8")
                 msg.header.stamp = self.get_clock().now().to_msg()
-                msg.header.frame_id = "nxp_cv_cam"
+                msg.header.frame_id = self.device
                 self.ImagePub.publish(msg)
                 self.CounterImageMsg += 1
             else:
@@ -95,7 +95,7 @@ class NXPCVCamNode(Node):
                 break
 
         if not self.videoCapture.isOpened():
-            Print("Video Capture Device is not open, check settings and connections.")
+            print("Video Capture Device is not open, check settings and connections.")
 
         return
 
